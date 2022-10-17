@@ -63,6 +63,7 @@ pipeline {
                                                branches: [[name: params.REVISION]],
                                                extensions: [[$class: 'LocalBranch']],
                                                userRemoteConfigs: [[credentialsId: 'github-sre-bot-ssh', url: 'git@github.com:pingcap/tiflow-operator.git']]]
+                                env.ImageTag = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
                             }
                         }
                         stage('build docker') {
